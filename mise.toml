@@ -1,0 +1,21 @@
+[tools]
+trivy = "latest"
+
+[tasks.install]
+description = "Install dependencies"
+run = """
+prek install
+"""
+
+[tasks.compose]
+description = "Run docker compose"
+run = """
+docker compose up -d --build
+"""
+
+[tasks.trivy]
+description = "Run trivy"
+run = """
+docker build -t joeckr/nginx:test .
+trivy image joeckr/nginx:test
+"""

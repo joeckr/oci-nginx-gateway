@@ -1,0 +1,19 @@
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - OIDC_ENABLED=true
+      - OIDC_ISSUER=https://idp.example.com
+      - OIDC_CLIENT_ID=test
+      - OIDC_CLIENT_SECRET=
+      - OIDC_REDIRECT_URI=http://localhost:8080/redirect_uri
+      - OIDC_SSL_VERIFY=no
+      - OIDC_SESSION_SECRET=
+      - NGINX_RESOLVER=127.0.0.11
+    ports:
+      - "8080:8080"
+    volumes:
+      - "index.html:/usr/share/nginx/html/index.html"
